@@ -1,0 +1,59 @@
+version: "3.7"
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    networks:
+      - app-network
+
+  webserver:
+    image: nginx:alpine
+    container_name: webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "9000:80"
+    volumes:
+      - ./:/var/www
+      - ./docker-config/nginx/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+
+  db:
+    image: mongo
+    container_name: db
+    restart: unless-stopped
+    tty: true
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - app-network
+
+  elasticsearch:
+    image: elasticsearch:6.5.4
+    container_name: elastic
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "9200:9200"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  dbdata:
+    driver: local
