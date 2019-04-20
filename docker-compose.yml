@@ -50,6 +50,18 @@ services:
     networks:
       - app-network
 
+  kibana:
+    image: kibana:6.5.4
+    container_name: kibana
+    restart: unless-stopped
+    tty: true
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5602:5601"
+    networks:
+      - app-network
+
 networks:
   app-network:
     driver: bridge
