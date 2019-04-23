@@ -39,7 +39,7 @@ RUN npm i && \
     npm i -g nodemon
 
 # Expose port 9000
-EXPOSE 9000 5602
+EXPOSE 9000
 
 # Start and watch nodemon file
 CMD nodemon index.js

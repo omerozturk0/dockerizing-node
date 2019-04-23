@@ -46,7 +46,7 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - "9200:9200"
+      - "9558:9200"
     networks:
       - app-network
 

@@ -1,7 +1,7 @@
 // Create app
 const express = require('express'),
   { Client } = require('@elastic/elasticsearch'),
-  client = new Client({node: 'http://localhost:9200'}),
+  client = new Client({node: 'http://elasticsearch:9200'}),
   app = express(),
   router = express.Router(),
   { writeLog } = require('./utils/log'),
