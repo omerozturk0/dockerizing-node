@@ -5,13 +5,14 @@ const express = require('express'),
   { Client } = require('@elastic/elasticsearch'),
   client = new Client({node: 'http://elasticsearch:9200'}),
   app = express(),
-  router = express.Router(),
   path = __dirname + '/html/';
 
+// Parsing log format
 const myFormat = printf(({ level, message, label, timestamp }) => {
   return `${timestamp} [${label}] ${level}: ${message}`;
 });
 
+// Creating app logs
 const logger = createLogger({
   level: 'info',
   format: combine(
@@ -52,12 +53,12 @@ app.get('/sharks', (req, res) => {
   res.sendFile(path + 'sharks.html');
 });
 
+// Show log files
 app.get('/log/:file', (req, res) => {
   res.sendFile(`${__dirname}/${req.params.file}.log`);
 });
 
 app.use(express.static(path));
-app.use('/', router);
 
 app.listen(9000, () => {
   console.log('Server is running at 9000 port');
