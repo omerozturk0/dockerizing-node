@@ -14,9 +14,9 @@ services:
     networks:
       - app-network
 
-  webserver:
+  nginx:
     image: nginx:alpine
-    container_name: webserver
+    container_name: nginx
     restart: unless-stopped
     tty: true
     ports:
@@ -41,7 +41,7 @@ services:
       - app-network
 
   elasticsearch:
-    image: elasticsearch:6.5.4
+    image: elasticsearch:7.0.0
     container_name: elastic
     restart: unless-stopped
     tty: true
@@ -51,7 +51,7 @@ services:
       - app-network
 
   kibana:
-    image: kibana:6.5.4
+    image: kibana:7.0.0
     container_name: kibana
     restart: unless-stopped
     tty: true

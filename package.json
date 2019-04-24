@@ -1,4 +1,7 @@
 {
+  "name": "elastic-node-kibana",
+  "version": "1.0.0",
+  "description": "A Node.js project with elasticsearch & kibana.",
   "dependencies": {
     "@elastic/elasticsearch": "^7.0.0-rc.2",
     "express": "^4.16.4",
